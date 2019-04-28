@@ -1,6 +1,5 @@
 import math
 from turtle import *
-import tkinter
 
 # The gravitational constant G
 G = 6.67428e-11
