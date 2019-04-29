@@ -41,7 +41,7 @@ class Planet():
 
         pygame.draw.circle(screen, self.color, [math.ceil(width / 2), math.ceil(height / 2)], math.ceil(self.diam / 2), 0)
 
-        for i in range(360):
+        for i in range(0, 360, 3):
             j = i * math.pi / 180
 
             dx = math.cos(j) * self.diam / 2
@@ -53,10 +53,13 @@ class Planet():
 
     def update(self):
         for water in self.water_list:
-            hx = self.accel() - water[2][0]
-            hy = self.accel() - water[2][1]
+            print(self.accel())
+            print(water[2][0], water[2][1], "*")
+            hx = self.accel() - water[2][0] - 5*10**27
+            hy = self.accel() - water[2][1] - 5*10**26
 
-            height_factor = 10**-23
+            print(hx, hy)
+            height_factor = 5 * 10**-27
 
             water[0] = pygame.draw.circle(screen, BLUE,
                                           [math.ceil(water[1][0] - hx * height_factor),
@@ -109,13 +112,13 @@ class Moon():
             moon_dir = [water[1][0] - self.pos[0], water[1][1] - self.pos[1]]
             moon_dist = math.sqrt((moon_dir[0])**2 + (moon_dir[1])**2)
 
-            planet_dir = [self.pos[0] - width, self.pos[1] - height]
+            planet_dir = [width - self.pos[0], height - self.pos[1]]
             planet_dist = math.sqrt((planet_dir[0])**2 + (planet_dir[1])**2)
 
             fx = - G * self.mass * M * (
-                        (moon_dir[0] / moon_dist ** 2) - (planet_dir[0] / planet_dist ** 2)*SCALE)
+                        (moon_dir[0] / moon_dist ** 2) - (planet_dir[0] / planet_dist ** 2)) * SCALE**2
             fy = - G * self.mass * M * (
-                        (moon_dir[1] / moon_dist ** 2) - (planet_dir[1] / planet_dist ** 2)*SCALE)
+                        (moon_dir[1] / moon_dist ** 2) - (planet_dir[1] / planet_dist ** 2)) * SCALE**2
 
             water[2][0] += fx
             water[2][1] += fy
