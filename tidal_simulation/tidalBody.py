@@ -5,7 +5,7 @@ import math
 G = 6.67428e-11
 
 # Scaling
-SCALE = 50000
+SCALE = 1/500000000
 
 # Mass of water blocks in kg
 WB = 100000
@@ -21,28 +21,38 @@ class Planet(Turtle):
     diam = diameter of the planet
     water_list = water on the planet
     """
+    px = py = 0.0
 
     name = 'Planet'
-    mass = None
-    equi = None
+    mass = 0
+    body = None
+    equi = 0
     dh = None
     bodylist = None
-    diam = None
+    diam = 0
     water_list = []
 
     def equi_force(self):
         """gives the gravitational force of the planet"""
         return G * self.mass * WB/ (self.diam ** 2)
 
-    def setup(self):
-        for x in range(720):
+    def draw_water(self):
 
-            #creates water pixels every half degree around the planet at the equilibrium height
-            water = None
-            water.px = (self.diam + self.equi) * math.cos(x/2)
-            water.py = (self.diam + self.equi) * math.sin(x/2)
+        for x in range(360):
 
-            water = self.dot(3, 'blue')
+            y = x * math.pi / 180
+
+            #creates water pixels every degree around the planet at the equilibrium height
+            water = Turtle()
+
+            water.color('blue')
+            water.shape("circle")
+            water.fillcolor('blue')
+            water.shapesize(0.01, 0.01, 0.01)
+            water.setx((self.diam + self.equi) * math.cos(y)) * SCALE
+            water.sety((self.diam + self.equi) * math.sin(y)) * SCALE
+            water.stamp()
+
             self.water_list.append(water)
 
     def tide_force_sum(self, bodylist):
@@ -156,3 +166,22 @@ def loop(bodies):
             body.goto(body.px * SCALE, body.py * SCALE)
             body.showturtle()
             body.pendown()
+
+def main():
+    screen = Screen()
+    screen.bgcolor("black")
+    earth = Planet()
+
+    # draws the planet with water on it
+    earth.color('gray')
+    earth.shape("circle")
+    earth.fillcolor('gray')
+    earth.shapesize(7, 7, 7)
+    earth.stamp()
+    earth.diam = 2000000
+    earth.equi = 2000000
+    earth.draw_water()
+    done()
+
+if __name__ == '__main__':
+    main()

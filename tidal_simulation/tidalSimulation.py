@@ -21,6 +21,7 @@ class Body(Turtle):
     mass = None
     vx = vy = 0.0
     px = py = 0.0
+    diam = None
 
     def attraction(self, other):
         """(Body): (fx, fy)
@@ -134,6 +135,7 @@ def main():
     earth.mass = 5.9742 * 10 ** 24
     earth.px = -1 * AU
     earth.vy = 29.783 * 1000  # 29.783 km/sec
+    earth.diam = 12756
     earth.shape("circle")
     earth.fillcolor('blue')
     earth.pencolor('blue')
