@@ -21,6 +21,10 @@ YELLOW = (255, 255, 0)
 # The gravitational constant G
 G = 6.67428e-11
 
+# Assumed scale: 100 pixels = 1AU.
+AU = (149.6e6 * 1000)  # 149.6 million km, in meters.
+SCALE = 250 / AU
+
 class Planet():
     def __init__(self, vel = [1, 1], color = BLACK, name = None, diam = 10, mass = 100000, pos = [100, 100]):
         self.v = vel[:]
@@ -99,9 +103,10 @@ class World():
         print()
 
 
-earth = Planet([-1, 0], BLUE, "Earth", 10, 10**16, [500, 400])
-mars = Planet([0, 1], RED, "Mars", 10, 10**15, [800, 300])
-w = World([earth, mars])
+earth = Planet([0, 2.9783], BLUE, "Earth", 10, 5.9742 * 10 ** 24, [400, 530])
+mars = Planet([0, -4.7], RED, "Mars", 10, 0.642 * 10 ** 24, [960, 600])
+sun = Planet([0, 0], YELLOW, "Sun", 40, 1.98892 * 10 ** 30, [960, 530])
+w = World([earth, mars, sun])
 
 while 1:
     screen.fill(BLACK)
