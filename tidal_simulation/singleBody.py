@@ -56,7 +56,7 @@ class Planet():
             print(self.accel())
             print(water[2][0], water[2][1], "*")
             hx = self.accel() - water[2][0] - 5*10**27
-            hy = self.accel() - water[2][1] - 5*10**26
+            hy = self.accel() - water[2][1] - 10**26
 
             print(hx, hy)
             height_factor = 5 * 10**-27
