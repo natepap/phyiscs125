@@ -124,7 +124,7 @@ class Moon():
             water[2][1] += fy
 
 earth = Planet(5.97 * 10**24, 100, GRAY)
-moon = Moon(0.073 * 10**24, 10, GREEN, earth, [350, (height / 2)], [0, -2])
+moon = Moon(0.073 * 10**24, 10, GREEN, earth, [350, (height / 2)], [0, 2])
 
 while 1:
     screen.fill(BLACK)
@@ -139,4 +139,4 @@ while 1:
                 pygame.quit()
 
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(1000)
